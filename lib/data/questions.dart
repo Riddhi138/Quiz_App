@@ -38,7 +38,7 @@ const questions = [
        'Row',
        'Column',
        'Stack',
-       'Column',
+       'Queue',
      ],
   ),
    QuizQuestion

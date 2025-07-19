@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
+import 'package:quiz_app/models/result_screen.dart';
 import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
@@ -52,11 +53,18 @@ class _QuizState extends State<Quiz>
     if(selectedAnswers.length == questions.length)             
     {
         setState(() {
-          selectedAnswers= [];
-          activeScreen = 'start-screen';
+          activeScreen = 'result-screen';
         });
     }
+    
   }
+
+  void restartQuiz() {
+  setState(() {
+    selectedAnswers = []; // clear the answers
+    activeScreen = 'question-screen'; // go back to questions
+  });
+}
 
   @override
   Widget build(context) {
@@ -67,6 +75,12 @@ class _QuizState extends State<Quiz>
     if(activeScreen == 'question-screen')
     {
       screenWidget = QuestionsScreen(onSelectedAnswer: choosenAnswers,);
+    }
+
+    if(activeScreen == 'result-screen')       //displaying the answer choosen by user
+    {
+      screenWidget = ResultScreen(choosenAnswer: selectedAnswers, onRestart: restartQuiz, );   //we already have list of answer choosen pass it as value
+      
     }
 
     return 
